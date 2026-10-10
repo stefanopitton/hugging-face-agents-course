@@ -6,7 +6,7 @@ kernel_name = agents-course
 install:
 	@echo "==================================================================="
 	@echo 'Installing deps...'
-	uv sync
+	uv sync --all-packages
 	@echo "Deps installed"
 	@echo "==================================================================="
 

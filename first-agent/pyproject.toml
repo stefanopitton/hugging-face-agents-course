@@ -1,0 +1,13 @@
+[project]
+name = "first-agent"
+version = "0.1.0"
+description = "First agent using smolagents"
+requires-python = ">=3.12"
+dependencies = [
+    "duckduckgo-search>=8.1.1",
+    "markdownify>=1.2.3",
+    "pandas>=3.0.6",
+    "pytz>=2026.5",
+    "requests>=2.34.2",
+    "smolagents[gradio]>=1.26.0",
+]
