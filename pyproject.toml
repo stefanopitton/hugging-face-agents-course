@@ -1,0 +1,25 @@
+[project]
+name = "hugging-face-agents-course"
+version = "0.1.0"
+description = "Notebooks for the Hugging Face Agents Course"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "jupyterlab>=4.6.4",
+]
+
+[tool.ruff]
+exclude = ["notebooks/**.ipynb", "tests/**"]
+
+[tool.ruff.lint]
+select = ["D", "I"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 80
+
+[dependency-groups]
+dev = ["mdformat>=1.0.0"]
