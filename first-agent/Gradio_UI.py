@@ -26,7 +26,7 @@ from smolagents.agent_types import (
     handle_agent_output_types,
 )
 from smolagents.agents import ActionStep, MultiStepAgent
-from smolagents.memory import MemoryStep
+from smolagents.memory import FinalAnswerStep, MemoryStep
 from smolagents.utils import _is_package_available
 
 
@@ -188,7 +188,8 @@ def stream_to_gradio(
         ):
             yield message
 
-    final_answer = step_log  # Last log is the run's final_answer
+    # Last log is the run's final answer; newer smolagents wrap it in a FinalAnswerStep
+    final_answer = step_log.output if isinstance(step_log, FinalAnswerStep) else step_log
     final_answer = handle_agent_output_types(final_answer)
 
     if isinstance(final_answer, AgentText):
