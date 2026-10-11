@@ -2,30 +2,38 @@
 
 Personal repository for the Hugging Face
 [Agents Course](https://huggingface.co/learn/agents-course). The repository
-contains experiments based on the notebooks distributed with the associated
-course.
+contains experiments based on the notebooks and packages distributed with the
+associated course. Moreover, all the code is based on the updated versions of
+the agentic frameworks providing the correct ways of defining agentic workflows.
 
 ## Requirements
 
-To execute the notebooks you need an Hugging Face account from which you can
-[create a token](https://huggingface.co/settings/tokens) and enough credits on
-your account to allow your agents to perform API calls. Once you have your
-token, update the environment file:
+To make the agents run, you need an Hugging Face account from which you can
+[create a token](https://huggingface.co/settings/tokens), and enough credits on
+your account to allow your agents to perform API calls.
+
+Once you have the token, update the environment file:
 
 ```sh
 mv .env-example .env
 ```
 
-And add the token to the `HF_TOKEN` variable.
+And add the token to the `HF_TOKEN` variable. If you want to experiment with
+agents telemetry, you also need a key from [langfuse](https://langfuse.com/).
 
 ## Usage
 
-The project is based on the [uv](https://docs.astral.sh/uv/) package manager.
-Install the dependencies:
+The project is based on the [uv](https://docs.astral.sh/uv/) package manager and
+is organized in workspaces to manage different applications within a single
+`uv.lock` file.
+
+Install the dependencies for all the packages:
 
 ```sh
 make install
 ```
+
+### Notebooks
 
 Create a specific IPython kernel for the project:
 
@@ -39,37 +47,23 @@ Start the Jupyter Notebook:
 make start
 ```
 
-requirements: uv export --package first-agent --no-hashes --no-dev
---no-emit-project -o first-agent/requirements.txt
+### Packages
 
-uv run --package first-agent python first-agent/app.py
-
-uv add --package second-agent <some-lib>
-
-## Workspaces
-
-The project uses workspaces to manage different applications within a single
-`uv.lock` file.
-
-To add a dependency to one of the workspace members:
+You can execute a single package with
 
 ```sh
-uv add --package <package-name> <dep-name>
+uv run --package <package-name> python <package-name>/app.py
 ```
 
-Generate only direct dependencies:
+If you prefer to use another package manager, you can generate the
+`requirements.txt` file for each package with:
+
+```sh
+uv export --package <package-name> --no-hashes --no-dev --no-emit-project -o <package-name>/requirements.txt
+```
+
+You can also generate only direct dependencies with a bit of Python:
 
 ```sh
 uv run python -c "import tomllib; print('\n'.join(tomllib.load(open('<package-name>/pyproject.toml','rb'))['project']['dependencies']))" > <package-name>/requirements.txt
 ```
-
-## First Agent
-
-From the project root, execute:
-
-```sh
-uv run --package first-agent python first-agent/app.py
-```
-
-This command will expose a front end to interact with the agent at the port
-`7860`.
