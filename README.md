@@ -19,7 +19,8 @@ mv .env-example .env
 ```
 
 And add the token to the `HF_TOKEN` variable. If you want to experiment with
-agents telemetry, you also need a key from [langfuse](https://langfuse.com/).
+agents telemetry, you also need a key from [langfuse](https://langfuse.com/) and
+from [SerpAPI](https://serpapi.com/).
 
 ## Usage
 
